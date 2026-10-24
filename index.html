@@ -51,7 +51,26 @@ a{color:inherit}
 .n1{color:var(--t-tranquilo)}.n2{color:var(--t-animado)}.n3{color:var(--t-lleno)}
 .n1 .barras i:nth-child(-n+1),.n2 .barras i:nth-child(-n+2),.n3 .barras i:nth-child(-n+3){opacity:1}
 /* CABECERA */
+.cab{position:fixed;inset:0 0 auto;z-index:20;background:rgba(243,239,230,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+.cab .envoltura{display:flex;align-items:center;gap:16px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font:800 1.125rem var(--display);text-decoration:none;white-space:nowrap}
+.cab nav{margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.cab nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.cab nav a{display:block;padding:12px 10px;text-decoration:none;font-weight:700;font-size:.9375rem;white-space:nowrap;border-radius:8px}
+.cab nav a:hover{background:var(--linea)}
+@media (max-width:767px){.cab nav{display:none}.cab .boton{margin-left:auto}}
 /* HERO */
+.hero{background:var(--ria);color:var(--hueso);padding:128px 0 72px;position:relative;overflow:hidden}
+.hero h1{font-size:clamp(2.5rem,9vw,5.5rem);font-weight:800;max-width:12ch}
+.hero h1 em{font-style:normal;color:var(--vivo)}
+.hero__sub{font-size:1.25rem;max-width:36ch;color:#D6E3E0}
+.pildoras{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:24px 0}
+.pildoras li{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid rgba(243,239,230,.35);border-radius:999px;font-weight:700;font-size:.9375rem}
+.botones{display:flex;flex-wrap:wrap;gap:12px}
+.hero__panal{position:absolute;right:-60px;top:80px;width:min(520px,70vw);opacity:.22;pointer-events:none}
+.hero__panal path{fill:none;stroke:var(--hueso);stroke-width:1.5}
+.hero__panal .on{fill:var(--vivo);stroke:none;animation:brilla 3s infinite alternate}
+@keyframes brilla{from{opacity:.3}to{opacity:1}}
 /* DEMO */
 /* PROBLEMA */
 /* APPS */
@@ -69,9 +88,35 @@ a{color:inherit}
   <symbol id="i-hex" viewBox="0 0 24 24"><path d="M12 3 19.8 7.5v9L12 21l-7.8-4.5v-9z"/></symbol>
 </svg>
 <a class="sr-only" href="#demo">Saltar a la demo</a>
-<!-- @CABECERA -->
+<header class="cab">
+  <div class="envoltura">
+    <a class="logo" href="#inicio"><span class="punto" aria-hidden="true"></span>Mapa Vivo · Avilés</a>
+    <nav aria-label="Secciones"><ul>
+      <li><a href="#demo">El mapa</a></li><li><a href="#para-ti">Para ti</a></li>
+      <li><a href="#ayuntamiento">Para el Ayuntamiento</a></li><li><a href="#privacidad">Privacidad</a></li>
+      <li><a href="#ruta">Hoja de ruta</a></li>
+    </ul></nav>
+    <a class="boton boton--vivo" href="#demo">Explora el mapa</a>
+  </div>
+</header>
 <main>
-<!-- @HERO -->
+<section class="hero" id="inicio" aria-labelledby="h1">
+  <svg class="hero__panal" viewBox="0 0 300 260" aria-hidden="true" id="panal"></svg>
+  <div class="envoltura">
+    <p class="ante" style="color:#B9CCC8"><span class="punto" aria-hidden="true"></span> Hackea Avilés 2026 · Reto de datos</p>
+    <h1 id="h1">Mira cuánta gente hay <em>antes de ir.</em></h1>
+    <p class="hero__sub">El gemelo vivo de Avilés en 2D y 3D. Para que salgas más y para que el Ayuntamiento se anticipe.</p>
+    <ul class="pildoras" aria-label="Garantías">
+      <li><svg class="icono" aria-hidden="true"><path d="M3.5 7.5h3l1.5-2h8l1.5 2h3v11h-17zM4 20 20 4"/></svg>Sin cámaras</li>
+      <li><svg class="icono" aria-hidden="true"><path d="M3 12s3.3-6 9-6 9 6 9 6-3.3 6-9 6-9-6-9-6zM4 20 20 4"/></svg>Sin seguirte</li>
+      <li><svg class="icono" aria-hidden="true"><path d="M5 6c0-1.4 3.1-2.5 7-2.5s7 1.1 7 2.5v12c0 1.4-3.1 2.5-7 2.5S5 19.4 5 18zM5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/></svg>Datos oficiales</li>
+    </ul>
+    <div class="botones">
+      <a class="boton boton--vivo" href="#demo">Explora el mapa <svg class="icono" aria-hidden="true"><use href="#i-flecha"/></svg></a>
+      <a class="boton boton--claro" href="#ayuntamiento">Soy del Ayuntamiento</a>
+    </div>
+  </div>
+</section>
 <!-- @DEMO -->
 <!-- @PROBLEMA -->
 <!-- @APPS -->
@@ -83,6 +128,16 @@ a{color:inherit}
 </main>
 <!-- @PIE -->
 <script>
+// Panal decorativo del hero: hexágonos de contorno con algunos encendidos
+(() => {
+  const s = document.getElementById('panal'); let h = '';
+  for (let r = 0; r < 6; r++) for (let c = 0; c < 7; c++) {
+    const x = c * 43 + (r % 2) * 21.5 + 20, y = r * 37 + 25;
+    const on = (r * 7 + c) % 5 === 1;
+    h += `<path class="${on ? 'on' : ''}" style="animation-delay:${(r + c) * .3}s" d="M${x} ${y-24}l21 12v24l-21 12-21-12v-24z"/>`;
+  }
+  s.innerHTML = h;
+})();
 // @JS
 </script>
 </body>
