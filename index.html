@@ -58,7 +58,7 @@ a{color:inherit}
 .cab nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
 .cab nav a{display:block;padding:12px 10px;text-decoration:none;font-weight:700;font-size:.9375rem;white-space:nowrap;border-radius:8px}
 .cab nav a:hover{background:var(--linea)}
-@media (max-width:767px){.cab nav{display:none}.cab .boton{margin-left:auto}}
+@media (max-width:767px){.cab nav{display:none}.cab .boton{margin-left:auto;min-height:44px;padding:8px 14px;font-size:.875rem;white-space:nowrap}}
 /* HERO */
 .hero{background:var(--ria);color:var(--hueso);padding:128px 0 72px;position:relative;overflow:hidden}
 .hero h1{font-size:clamp(2.5rem,9vw,5.5rem);font-weight:800;max-width:12ch}
@@ -72,6 +72,47 @@ a{color:inherit}
 .hero__panal .on{fill:var(--vivo);stroke:none;animation:brilla 3s infinite alternate}
 @keyframes brilla{from{opacity:.3}to{opacity:1}}
 /* DEMO */
+.demo{background:var(--blanco)}
+.demo__cab{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:24px 0 8px}
+.etiqueta{display:inline-flex;align-items:center;gap:8px;font-size:.875rem;font-weight:700;background:var(--hueso);border:1px dashed var(--suave);padding:6px 12px;border-radius:999px}
+.segm{display:inline-flex;border:2px solid var(--tinta);border-radius:999px;padding:3px}
+.segm button{min-width:64px;min-height:44px;border:0;border-radius:999px;background:none;font:700 1rem var(--texto);color:var(--tinta);cursor:pointer}
+.segm button[aria-pressed=true]{background:var(--tinta);color:var(--hueso)}
+.demo__cuerpo{display:grid;gap:16px}
+@media (min-width:900px){.demo__cuerpo{grid-template-columns:1fr 300px;align-items:start}}
+.escena{perspective:1400px;padding:12px 0;overflow:hidden;transition:padding 1s}
+.escena.es3d{padding-top:56px}
+.maqueta{position:relative;width:100%;aspect-ratio:10.5/5.485;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.65,0,.35,1)}
+.es3d .maqueta{transform:rotateX(55deg) rotateZ(-30deg) scale(.82)}
+.celda{position:absolute;width:9.52%;height:21.05%;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.65,0,.35,1),filter .8s}
+.celda span{position:absolute;inset:2%;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:#E4DDCF;transition:background .6s}
+.celda.i span{background:#D3CBBB}
+.celda.r span{background:#2B6F7A}
+.celda.r:nth-child(odd) span{background:#2F7783}
+.celda[data-z]{cursor:pointer}
+.celda.l1 span{background:var(--tranquilo)}.celda.l2 span{background:var(--animado)}.celda.l3 span{background:var(--lleno)}
+.celda.est span{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 4px,transparent 4px 9px)}
+.celda[data-z]:hover span{filter:brightness(1.12)}
+.es3d .celda.l1{transform:translateZ(8px);filter:drop-shadow(-4px 6px 0 rgba(20,33,31,.3))}
+.es3d .celda.l2{transform:translateZ(22px);filter:drop-shadow(-8px 12px 0 rgba(20,33,31,.3))}
+.es3d .celda.l3{transform:translateZ(40px);filter:drop-shadow(-12px 18px 0 rgba(20,33,31,.3))}
+.rotulo{position:absolute;z-index:5;transform:translate(-50%,-50%);transform-origin:50% 100%;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 10px;min-height:44px;border:2px solid var(--tinta);border-radius:10px;background:var(--blanco);color:var(--tinta);font:700 .8125rem/1.1 var(--texto);cursor:pointer;white-space:nowrap;transition:transform 1s cubic-bezier(.65,0,.35,1)}
+.rotulo .nivel{font-size:.75rem}
+.es3d .rotulo{transform:translate(-50%,-100%) translateZ(70px) rotateZ(30deg) rotateX(-55deg)}
+.rotulo[aria-pressed=true]{background:var(--vivo)}
+.rotulo .corto{display:none}
+@media (max-width:600px){.es3d .maqueta{transform:rotateX(55deg) rotateZ(-30deg) scale(.98)}.es3d .rotulo{transform:translate(-50%,-100%) translateZ(36px) rotateZ(30deg) rotateX(-55deg)}.rotulo{font-size:.75rem;padding:4px 8px;min-height:36px;justify-content:center}.rotulo .nivel,.rotulo .largo{display:none}.rotulo .corto{display:inline}}
+.reloj{display:flex;align-items:center;gap:12px;margin-top:8px}
+.reloj button{width:48px;height:48px;border-radius:50%;border:0;background:var(--tinta);color:var(--vivo);cursor:pointer;display:grid;place-items:center}
+.reloj input{flex:1;accent-color:var(--ria);min-height:44px}
+.reloj output{font:800 1.75rem var(--display);min-width:3.2ch;font-variant-numeric:tabular-nums}
+.ficha{background:var(--hueso);border-radius:var(--r);padding:20px;border:2px solid var(--tinta)}
+.ficha dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:12px 0 0}
+.ficha dt{color:var(--suave);font-size:.875rem}.ficha dd{margin:0;font-weight:700}
+.leyenda{display:flex;flex-wrap:wrap;gap:8px 16px;list-style:none;padding:0;margin:12px 0}
+.leyenda .muestra{display:inline-block;width:18px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px;background:var(--suave)}
+.leyenda .muestra.est{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.55) 0 3px,transparent 3px 7px)}
+.nota{font-size:.875rem;color:var(--suave)}
 /* PROBLEMA */
 /* APPS */
 /* PARA TI */
@@ -117,7 +158,40 @@ a{color:inherit}
     </div>
   </div>
 </section>
-<!-- @DEMO -->
+<section class="seccion demo" id="demo" aria-labelledby="demo-t">
+  <div class="envoltura">
+    <p class="ante">La demo · El gemelo vivo</p>
+    <h2 id="demo-t">Un sábado de Antroxu, de 16:00 a 22:00</h2>
+    <p class="entradilla">Mueve el reloj y mira cómo se llena Galiana con el Descenso. Toca una zona para ver su ficha.</p>
+    <div class="demo__cab">
+      <span class="etiqueta"><span class="punto" aria-hidden="true"></span>Datos de ejemplo · sábado de Antroxu</span>
+      <div class="segm" role="group" aria-label="Vista">
+        <button type="button" data-vista="2d" aria-pressed="false">2D</button>
+        <button type="button" data-vista="3d" aria-pressed="true">3D</button>
+      </div>
+    </div>
+    <div class="demo__cuerpo">
+      <div>
+        <div class="escena es3d" id="escena"><div class="maqueta" id="maqueta" role="group" aria-label="Maqueta de hexágonos del casco de Avilés y la ría"></div></div>
+        <div class="reloj">
+          <button type="button" id="play" aria-label="Reproducir la tarde"><svg class="icono" aria-hidden="true" id="play-i"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></button>
+          <label class="sr-only" for="hora">Hora</label>
+          <input type="range" id="hora" min="0" max="360" step="30" value="150">
+          <output id="hora-o" for="hora">18:30</output>
+        </div>
+        <ul class="leyenda" aria-label="Leyenda">
+          <li class="nivel n1"><span class="barras" aria-hidden="true"><i></i><i></i><i></i></span>Tranquilo</li>
+          <li class="nivel n2"><span class="barras" aria-hidden="true"><i></i><i></i><i></i></span>Animado</li>
+          <li class="nivel n3"><span class="barras" aria-hidden="true"><i></i><i></i><i></i></span>Lleno</li>
+          <li><span class="muestra est" aria-hidden="true"></span>Estimado (rayado)</li>
+          <li><span class="muestra" aria-hidden="true"></span>Medido (liso)</li>
+        </ul>
+        <p class="nota">Representación ilustrativa, no a escala. La vista en primera persona llegará en la app.</p>
+      </div>
+      <div class="ficha" id="ficha" aria-live="polite"><h3>Toca una zona</h3><p class="nota">Verás su nivel de afluencia, si el dato es estimado o medido y quién gestiona el espacio.</p></div>
+    </div>
+  </div>
+</section>
 <!-- @PROBLEMA -->
 <!-- @APPS -->
 <!-- @PARATI -->
@@ -138,6 +212,78 @@ a{color:inherit}
   }
   s.innerHTML = h;
 })();
+// ---------- DEMO: maqueta de hexágonos ----------
+// Plano de 10 × 6 celdas. r = ría, i = industria, . = ciudad; letras = zonas.
+const PLANO = ['iiiNNNNiii', 'rrrrrrrrrr', 'MMMM..PP..', 'FF.G.PP.OO', 'FFFG...OO.', 'FF.G...O..'];
+const ZONAS = {
+  G: { id: 'galiana', corto: 'Galiana', nombre: 'Calle Galiana', gestor: 'Ayuntamiento de Avilés', medida: true, n: [2, 2, 3, 3, 2, 2, 1] },
+  P: { id: 'plaza', corto: 'Pl. España', nombre: 'Plaza de España', gestor: 'Ayuntamiento de Avilés', n: [2, 2, 2, 2, 3, 3, 2] },
+  N: { id: 'niemeyer', corto: 'Niemeyer', nombre: 'Centro Niemeyer', gestor: 'Principado de Asturias (Fundación Centro Niemeyer)', medida: true, n: [1, 1, 1, 1, 2, 2, 1] },
+  M: { id: 'muelle', corto: 'Muelle', nombre: 'Parque del Muelle', gestor: 'Autoridad Portuaria (muelle y ría)', n: [2, 2, 2, 1, 1, 1, 1] },
+  F: { id: 'ferrera', corto: 'Ferrera', nombre: 'Parque de Ferrera', gestor: 'Ayuntamiento de Avilés', n: [2, 2, 1, 1, 1, 1, 1] },
+  O: { id: 'orbon', corto: 'Orbón', nombre: 'Plaza Hermanos Orbón', gestor: 'Ayuntamiento de Avilés', n: [1, 2, 2, 2, 2, 3, 2] },
+};
+const CLAVES = [0, 60, 120, 150, 210, 270, 360]; // minutos desde las 16:00
+const NOMBRE_NIVEL = ['', 'Tranquilo', 'Animado', 'Lleno'];
+const aHora = (m) => `${16 + Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`;
+function nivelEn(z, m) { // interpola entre puntos clave y redondea al nivel más cercano
+  let i = CLAVES.findIndex((k) => k > m); if (i === -1) return z.n.at(-1); if (i === 0) return z.n[0];
+  const t = (m - CLAVES[i - 1]) / (CLAVES[i] - CLAVES[i - 1]);
+  return Math.round(z.n[i - 1] + (z.n[i] - z.n[i - 1]) * t);
+}
+const etiquetaNivel = (n) => `<span class="nivel n${n}"><span class="barras" aria-hidden="true"><i></i><i></i><i></i></span>${NOMBRE_NIVEL[n]}</span>`;
+const maqueta = document.getElementById('maqueta');
+const celdas = {}, rotulos = {};
+let zonaSel = null, minuto = 150;
+PLANO.forEach((fila, r) => [...fila].forEach((ch, c) => {
+  const d = document.createElement('div'); d.className = 'celda ' + (ch === 'r' ? 'r' : ch === 'i' ? 'i' : '');
+  d.style.left = ((c + (r % 2) * .5) / 10.5 * 100) + '%'; d.style.top = (r * .866 / 5.485 * 100) + '%';
+  d.innerHTML = '<span></span>';
+  if (ZONAS[ch]) { d.dataset.z = ch; (celdas[ch] ||= []).push(d); d.addEventListener('click', () => abrir(ch)); }
+  maqueta.append(d);
+}));
+for (const [k, z] of Object.entries(ZONAS)) { // rótulo-botón en el centro de cada zona (accesible por teclado)
+  const cs = celdas[k], b = document.createElement('button'); b.type = 'button'; b.className = 'rotulo';
+  b.style.left = `calc(${cs.reduce((s, d) => s + parseFloat(d.style.left), 0) / cs.length}% + 4.76%)`;
+  b.style.top = `calc(${cs.reduce((s, d) => s + parseFloat(d.style.top), 0) / cs.length}% + 10.5%)`;
+  b.addEventListener('click', () => abrir(k)); rotulos[k] = b; maqueta.append(b);
+}
+function abrir(k) { zonaSel = k; pintar(); document.getElementById('ficha').scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+const esMedida = (z, m) => z.medida && m >= 120;
+function pintar() {
+  for (const [k, z] of Object.entries(ZONAS)) {
+    const n = nivelEn(z, minuto), med = esMedida(z, minuto);
+    celdas[k].forEach((d) => { d.classList.remove('l1', 'l2', 'l3'); d.classList.add('l' + n); d.classList.toggle('est', !med); });
+    rotulos[k].innerHTML = `<span class="largo">${z.nombre}</span><span class="corto">${z.corto}</span>${etiquetaNivel(n)}`;
+    rotulos[k].setAttribute('aria-label', `${z.nombre}: ${NOMBRE_NIVEL[n]}, dato ${med ? 'medido' : 'estimado'}. Abrir ficha`);
+    rotulos[k].setAttribute('aria-pressed', k === zonaSel);
+  }
+  if (zonaSel) {
+    const z = ZONAS[zonaSel], n = nivelEn(z, minuto);
+    document.getElementById('ficha').innerHTML = `<h3>${z.nombre}</h3>${etiquetaNivel(n)}<dl>
+      <dt>Hora</dt><dd>${aHora(minuto)}</dd><dt>Dato</dt><dd>${esMedida(z, minuto) ? 'Medido' : 'Estimado'}</dd>
+      <dt>Gestiona</dt><dd>${z.gestor}</dd></dl><p class="nota" style="margin-top:12px">Datos de ejemplo.</p>`;
+  }
+  alHora.forEach((f) => f(minuto));
+}
+const alHora = []; // otras secciones (alertas) se suscriben a la hora
+const rango = document.getElementById('hora'), salida = document.getElementById('hora-o');
+function ponHora(m) { minuto = m; rango.value = m; salida.value = aHora(m); rango.setAttribute('aria-valuetext', aHora(m)); pintar(); }
+rango.addEventListener('input', () => ponHora(+rango.value));
+let temporizador = null; const play = document.getElementById('play');
+function parar() { clearInterval(temporizador); temporizador = null; play.setAttribute('aria-label', 'Reproducir la tarde');
+  document.getElementById('play-i').innerHTML = '<path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/>'; }
+play.addEventListener('click', () => {
+  if (temporizador) return parar();
+  if (minuto >= 360) ponHora(0);
+  play.setAttribute('aria-label', 'Pausar'); document.getElementById('play-i').innerHTML = '<path d="M8.5 5.5v13M15.5 5.5v13"/>';
+  temporizador = setInterval(() => (minuto >= 360 ? parar() : ponHora(minuto + 30)), 900);
+});
+document.querySelectorAll('[data-vista]').forEach((b) => b.addEventListener('click', () => {
+  document.getElementById('escena').classList.toggle('es3d', b.dataset.vista === '3d');
+  document.querySelectorAll('[data-vista]').forEach((x) => x.setAttribute('aria-pressed', x === b));
+}));
+queueMicrotask(() => ponHora(150));
 // @JS
 </script>
 </body>
