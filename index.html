@@ -158,8 +158,31 @@ a{color:inherit}
 @keyframes entra{from{opacity:0;transform:translateX(-8px)}}
 .ayto .nota{color:#B9CCC8}
 /* PRIVACIDAD */
+.promesas{list-style:none;padding:0;margin:32px 0 0;counter-reset:p}
+.promesas li{counter-increment:p;display:flex;gap:16px;align-items:baseline;padding:20px 0;border-top:2px solid var(--tinta);font:700 clamp(1.25rem,4vw,2.5rem)/1.15 var(--display)}
+.promesas li::before{content:counter(p);font-size:1rem;width:2rem;height:2rem;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--vivo);transform:translateY(-4px)}
+.promesas small{display:block;font:400 1rem var(--texto);color:var(--suave);margin-top:6px}
 /* RUTA */
+.ruta{background:var(--blanco)}
+.etapas{display:grid;gap:16px;list-style:none;padding:0;margin:32px 0 0}
+@media (min-width:900px){.etapas{grid-template-columns:repeat(4,1fr)}}
+.etapa{position:relative;padding:24px;border-radius:var(--r);border:2px solid var(--tinta)}
+.etapa .cuando{font:700 .875rem var(--texto);text-transform:uppercase;letter-spacing:.08em;color:var(--suave);margin:0 0 6px}
+.etapa ul{margin:0;padding-left:18px}
+.etapa--hoy{background:var(--vivo);border-color:var(--vivo)}.etapa--hoy .cuando{color:var(--tinta)}
+.etapa--vision{border-style:dashed}
 /* EQUIPO Y PIE */
+.miembros{display:grid;gap:16px;list-style:none;padding:0;margin:32px 0 0;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.miembro{text-align:center}
+.hexa{display:grid;place-items:center;width:88px;height:100px;margin:0 auto 10px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:var(--ria);color:var(--vivo);font:800 2rem var(--display)}
+.miembro strong{display:block;font:800 1.25rem var(--display)}
+.miembro span{color:var(--suave);font-size:.9375rem}
+.final{background:var(--vivo);text-align:center}
+.final h2{font-size:clamp(2rem,6vw,4rem);max-width:16ch;margin:0 auto .4em}
+.final .botones{justify-content:center}
+.final .boton--vivo{background:var(--tinta);color:var(--vivo);border-color:var(--tinta)}
+.pie{background:var(--tinta);color:#D6E3E0;padding:48px 0;font-size:.9375rem}
+.pie strong{color:var(--hueso)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -307,11 +330,65 @@ a{color:inherit}
     </div>
   </div>
 </section>
-<!-- @PRIVACIDAD -->
-<!-- @RUTA -->
-<!-- @EQUIPO -->
+<section class="seccion" id="privacidad" aria-labelledby="priv-t">
+  <div class="envoltura">
+    <p class="ante">Privacidad</p>
+    <h2 id="priv-t">Contamos gente. Nunca a nadie.</h2>
+    <ol class="promesas">
+      <li><span>Tu ubicación exacta no sale de tu móvil.<small>El móvil la convierte en una celda hexagonal y solo envía un recuento.</small></span></li>
+      <li><span>Mínimo 10 personas para publicar una zona.<small>Nunca se sabe quién es quién.</small></span></li>
+      <li><span>Los recuentos se borran en 24 horas.</span></li>
+      <li><span>Sin cámaras.</span></li>
+      <li><span>Todo es opcional.<small>Se desactiva con un toque.</small></span></li>
+    </ol>
+    <p class="nota" style="margin-top:24px">Desde el piloto, con evaluación de impacto en protección de datos (RGPD).</p>
+  </div>
+</section>
+<section class="seccion ruta" id="ruta" aria-labelledby="ruta-t">
+  <div class="envoltura">
+    <p class="ante">Hoja de ruta · Propuesta de piloto</p>
+    <h2 id="ruta-t">Un evento, una zona, una métrica</h2>
+    <ol class="etapas">
+      <li class="etapa etapa--hoy"><p class="cuando">Hoy</p><h3>Demo</h3><ul><li>Esta web y la maqueta</li><li>Datos de ejemplo</li></ul></li>
+      <li class="etapa"><p class="cuando">Antroxu 2027</p><h3>Piloto</h3><ul><li>Casco histórico y ría</li><li>Validado con aforadores</li><li>Éxito: ≥ 80 % de acierto</li></ul></li>
+      <li class="etapa"><p class="cuando">2027</p><h3>Fase 2</h3><ul><li>Comercio local y QR</li><li>Comunidad y quedadas</li><li>Recuento anónimo por wifi</li></ul></li>
+      <li class="etapa etapa--vision"><p class="cuando">Visión de futuro</p><h3>Más allá</h3><ul><li>Realidad virtual</li><li>Red de ciudades inteligentes</li></ul><p class="nota" style="margin:8px 0 0">Aún no existe: es hacia dónde podría crecer.</p></li>
+    </ol>
+  </div>
+</section>
+<section class="seccion" id="equipo" aria-labelledby="eq-t">
+  <div class="envoltura">
+    <p class="ante">El equipo</p>
+    <h2 id="eq-t">Seis personas, 90 ideas, 5 elegidas</h2>
+    <p class="entradilla">90 ideas en un brainwriting 6-3-5 y 5 elegidas para Hackea Avilés 2026.</p>
+    <ul class="miembros">
+      <li class="miembro"><span class="hexa" aria-hidden="true">O</span><strong>Omar</strong><span>Coordinación y datos</span></li>
+      <li class="miembro"><span class="hexa" aria-hidden="true">K</span><strong>Kike</strong><span>Panel y previsión</span></li>
+      <li class="miembro"><span class="hexa" aria-hidden="true">R</span><strong>Román</strong><span>Mapa y emergencias</span></li>
+      <li class="miembro"><span class="hexa" aria-hidden="true">Á</span><strong>Ángel</strong><span>Avisos y comercio</span></li>
+      <li class="miembro"><span class="hexa" aria-hidden="true">A</span><strong>Albert</strong><span>Experiencia de uso</span></li>
+      <li class="miembro"><span class="hexa" aria-hidden="true">C</span><strong>Camila</strong><span>Integraciones y comunidad</span></li>
+    </ul>
+  </div>
+</section>
+<section class="seccion final" aria-labelledby="fin-t">
+  <div class="envoltura">
+    <h2 id="fin-t">Avilés tiene planes. Vamos a enseñarlos.</h2>
+    <p class="entradilla" style="margin:0 auto 24px">Pedimos un evento y tres meses para demostrarlo.</p>
+    <div class="botones">
+      <a class="boton boton--vivo" href="#demo">Explora el mapa</a>
+      <a class="boton boton--claro" href="#ruta">Propuesta de piloto</a>
+    </div>
+  </div>
+</section>
 </main>
-<!-- @PIE -->
+<footer class="pie">
+  <div class="envoltura">
+    <p><strong>Proyecto del equipo Mapa Vivo para Hackea Avilés 2026. No es un servicio oficial del Ayuntamiento de Avilés.</strong></p>
+    <p>Prototipo: la app aún no existe y todos los datos de afluencia, eventos y alertas son de ejemplo. Dato de población: INE, abril de 2025.</p>
+    <p>Sin cookies y sin analítica. Tipografías de Google Fonts.</p>
+  </div>
+</footer>
 <script>
 // Panal decorativo del hero: hexágonos de contorno con algunos encendidos
 (() => {
@@ -408,7 +485,6 @@ alHora.push((m) => {
     || '<li style="border-color:transparent"><time>—</time><span>Sin alertas todavía. Avanza el reloj de la demo.</span></li>';
 });
 queueMicrotask(() => ponHora(150));
-// @JS
 </script>
 </body>
 </html>
