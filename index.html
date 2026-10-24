@@ -114,7 +114,25 @@ a{color:inherit}
 .leyenda .muestra.est{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.55) 0 3px,transparent 3px 7px)}
 .nota{font-size:.875rem;color:var(--suave)}
 /* PROBLEMA */
+.problema h2 s{text-decoration-color:var(--lleno);text-decoration-thickness:.12em}
+.vinetas{display:grid;gap:16px;list-style:none;padding:0;margin:32px 0;counter-reset:v}
+@media (min-width:768px){.vinetas{grid-template-columns:repeat(3,1fr)}}
+.vineta{background:var(--blanco);border-radius:var(--r);padding:24px;border:1px solid var(--linea)}
+.vineta .hora{font:800 1.75rem var(--display);color:var(--ria);margin-bottom:8px}
+.cierre{font:800 clamp(1.75rem,5vw,2.75rem)/1.1 var(--display);max-width:22ch;margin-top:32px}
+.cierre span{background:linear-gradient(transparent 62%,var(--vivo) 62%)}
 /* APPS */
+.apps{background:var(--blanco)}
+.fichas{display:grid;gap:12px;list-style:none;padding:0;margin:24px 0 48px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.fichas li{border:2px solid var(--tinta);border-radius:var(--r);padding:16px}
+.fichas strong{display:block;font:800 1.25rem var(--display);margin-bottom:4px}
+.fichas .mv{background:var(--vivo);border-color:var(--vivo)}
+.tabla{width:100%;border-collapse:collapse;font-size:1rem}
+.tabla th,.tabla td{padding:12px 8px;border-bottom:1px solid var(--linea);text-align:left}
+.tabla thead th{font-family:var(--display);font-size:.9375rem}
+.tabla td{text-align:center;font-weight:700;white-space:nowrap}
+.tabla .si{color:var(--t-tranquilo)}.tabla .no{color:var(--suave)}
+.tabla .mvc{background:rgba(242,200,51,.25)}
 /* PARA TI */
 /* AYUNTAMIENTO */
 /* PRIVACIDAD */
@@ -192,8 +210,44 @@ a{color:inherit}
     </div>
   </div>
 </section>
-<!-- @PROBLEMA -->
-<!-- @APPS -->
+<section class="seccion problema" id="problema" aria-labelledby="prob-t">
+  <div class="envoltura">
+    <p class="ante">El problema</p>
+    <h2 id="prob-t">«En Avilés <s>no hay nada</s>»</h2>
+    <p class="entradilla">Esta es Sara, nuestra <strong>usuaria tipo</strong>: 22 años, estudia Enfermería, llegó de Cáceres sin conocer a nadie y es tímida. Le da miedo llegar sola a un sitio vacío.</p>
+    <ol class="vinetas">
+      <li class="vineta"><p class="hora">17:40</p><h3>No sabe qué hay</h3><p>Redes de cada local, la web municipal, carteles… La información está repartida en diez sitios.</p></li>
+      <li class="vineta"><p class="hora">18:05</p><h3>Los horarios fallan</h3><p>El buscador le da un horario que ya no vale. Llega y está cerrado, o no hay nadie.</p></li>
+      <li class="vineta"><p class="hora">18:30</p><h3>Acaba en casa o en Gijón</h3><p>Y a diez minutos, miles de personas bajan Galiana disfrazadas. Ella no lo sabía.</p></li>
+    </ol>
+    <p class="cierre">No es que no haya planes. <span>Es que nadie te los enseña.</span></p>
+  </div>
+</section>
+<section class="seccion apps" id="apps" aria-labelledby="apps-t">
+  <div class="envoltura">
+    <p class="ante">Lo que ya existe</p>
+    <h2 id="apps-t">Avilés ya tiene apps, pero no el ahora</h2>
+    <ul class="fichas">
+      <li><strong>PIDA</strong>Información y trámites municipales.</li>
+      <li><strong>Cuida Avilés</strong>Avisar de desperfectos en la calle.</li>
+      <li><strong>Cita Previa OAR</strong>Pedir cita para trámites de recaudación.</li>
+      <li><strong>EnBiciAvilés</strong>La bici pública.</li>
+      <li><strong>Avilés AR</strong>Patrimonio en realidad aumentada.</li>
+      <li class="mv"><strong>¿Y cuál te dice dónde hay gente ahora?</strong>→ Mapa Vivo. No las sustituye: las conecta.</li>
+    </ul>
+    <h3>¿Y Google Maps?</h3>
+    <table class="tabla">
+      <thead><tr><th scope="col">Qué necesitas saber</th><th scope="col" class="mvc">Mapa Vivo</th><th scope="col">Google Maps</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Gente en calles y plazas durante un evento</th><td class="mvc si">✓ Sí</td><td class="no">— No</td></tr>
+        <tr><th scope="row">Agenda oficial de Avilés</th><td class="mvc si">✓ Sí</td><td class="no">— No</td></tr>
+        <tr><th scope="row">Quién gestiona cada espacio</th><td class="mvc si">✓ Sí</td><td class="no">— No</td></tr>
+        <tr><th scope="row">Previsión de aglomeraciones</th><td class="mvc si">✓ Sí</td><td class="no">— No</td></tr>
+        <tr><th scope="row">Aviso a la Policía Local</th><td class="mvc si">✓ Sí</td><td class="no">— No</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 <!-- @PARATI -->
 <!-- @AYTO -->
 <!-- @PRIVACIDAD -->
