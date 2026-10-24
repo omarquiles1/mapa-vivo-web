@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <style>
 :root{
   --ria:#0E3B43; --hueso:#F3EFE6; --tinta:#14211F; --vivo:#F2C833;
@@ -82,6 +83,11 @@ a{color:inherit}
 @media (min-width:900px){.demo__cuerpo{grid-template-columns:1fr 300px;align-items:start}}
 .escena{perspective:1400px;padding:12px 0;overflow:hidden;transition:padding 1s}
 .escena.es3d{padding-top:56px}
+.escena[hidden],.mapa-real[hidden]{display:none}
+.mapa-real{height:440px;border-radius:var(--r);border:2px solid var(--tinta);z-index:0}
+@media (min-width:900px){.mapa-real{height:540px}}
+.mapa-real .leaflet-interactive:focus-visible{outline:none;stroke:var(--tinta);stroke-width:5}
+.leaflet-tooltip.zona-tt{font:700 .8125rem/1.2 var(--texto);border:2px solid var(--tinta);border-radius:8px;padding:4px 8px;text-align:center}
 .maqueta{position:relative;width:100%;aspect-ratio:10.5/5.485;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.65,0,.35,1)}
 .es3d .maqueta{transform:rotateX(55deg) rotateZ(-30deg) scale(.82)}
 .celda{position:absolute;width:9.52%;height:21.05%;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.65,0,.35,1),filter .8s}
@@ -190,6 +196,12 @@ a{color:inherit}
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"/></symbol>
   <symbol id="i-hex" viewBox="0 0 24 24"><path d="M12 3 19.8 7.5v9L12 21l-7.8-4.5v-9z"/></symbol>
+  <!-- Rayado de los círculos del mapa real cuando el dato es estimado -->
+  <defs>
+    <pattern id="raya1" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#2E9E6B"/><rect width="4" height="10" fill="#fff" fill-opacity=".55"/></pattern>
+    <pattern id="raya2" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#E8892B"/><rect width="4" height="10" fill="#fff" fill-opacity=".55"/></pattern>
+    <pattern id="raya3" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#D64541"/><rect width="4" height="10" fill="#fff" fill-opacity=".55"/></pattern>
+  </defs>
 </svg>
 <a class="sr-only" href="#demo">Saltar a la demo</a>
 <header class="cab">
@@ -236,6 +248,7 @@ a{color:inherit}
     <div class="demo__cuerpo">
       <div>
         <div class="escena es3d" id="escena"><div class="maqueta" id="maqueta" role="group" aria-label="Maqueta de hexágonos del casco de Avilés y la ría"></div></div>
+        <div class="mapa-real" id="mapa-real" hidden role="region" aria-label="Mapa real de Avilés con las zonas de afluencia. Tabulador para recorrer las zonas, Intro para abrir su ficha."></div>
         <div class="reloj">
           <button type="button" id="play" aria-label="Reproducir la tarde"><svg class="icono" aria-hidden="true" id="play-i"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></button>
           <label class="sr-only" for="hora">Hora</label>
@@ -249,7 +262,7 @@ a{color:inherit}
           <li><span class="muestra est" aria-hidden="true"></span>Estimado (rayado)</li>
           <li><span class="muestra" aria-hidden="true"></span>Medido (liso)</li>
         </ul>
-        <p class="nota">Representación ilustrativa, no a escala. La vista en primera persona llegará en la app.</p>
+        <p class="nota">2D: mapa real de OpenStreetMap con zonas de radio aproximado. 3D: representación ilustrativa, no a escala. La vista en primera persona llegará en la app.</p>
       </div>
       <div class="ficha" id="ficha" aria-live="polite"><h3>Toca una zona</h3><p class="nota">Verás su nivel de afluencia, si el dato es estimado o medido y quién gestiona el espacio.</p></div>
     </div>
@@ -386,9 +399,10 @@ a{color:inherit}
   <div class="envoltura">
     <p><strong>Proyecto del equipo Mapa Vivo para Hackea Avilés 2026. No es un servicio oficial del Ayuntamiento de Avilés.</strong></p>
     <p>Prototipo: la app aún no existe y todos los datos de afluencia, eventos y alertas son de ejemplo. Dato de población: INE, abril de 2025.</p>
-    <p>Sin cookies y sin analítica. Tipografías de Google Fonts.</p>
+    <p>Sin cookies y sin analítica. Tipografías de Google Fonts. Mapa con Leaflet y teselas © colaboradores de OpenStreetMap.</p>
   </div>
 </footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 // Panal decorativo del hero: hexágonos de contorno con algunos encendidos
 (() => {
@@ -467,8 +481,47 @@ play.addEventListener('click', () => {
   play.setAttribute('aria-label', 'Pausar'); document.getElementById('play-i').innerHTML = '<path d="M8.5 5.5v13M15.5 5.5v13"/>';
   temporizador = setInterval(() => (minuto >= 360 ? parar() : ponHora(minuto + 30)), 900);
 });
+// ---------- Vista 2D: mapa real con Leaflet + OpenStreetMap ----------
+// Posiciones aproximadas: corrígelas aquí. Radio en metros.
+const POSICIONES = {
+  G: { latlng: [43.5568, -5.9222], radio: 90 },  // galiana
+  P: { latlng: [43.5553, -5.9240], radio: 140 }, // plaza_espana
+  N: { latlng: [43.5735, -5.9330], radio: 140 }, // niemeyer
+  M: { latlng: [43.5590, -5.9270], radio: 140 }, // muelle
+  F: { latlng: [43.5540, -5.9180], radio: 140 }, // ferrera
+  O: { latlng: [43.5580, -5.9205], radio: 90 },  // orbon
+};
+const COLOR_NIVEL = ['', '#2E9E6B', '#E8892B', '#D64541']; // los mismos de la leyenda
+const escena = document.getElementById('escena'), divMapa = document.getElementById('mapa-real');
+let mapa = null; const circulos = {};
+function creaMapa() {
+  if (mapa || !window.L) return;
+  mapa = L.map(divMapa, { scrollWheelZoom: false }).setView([43.5560, -5.9240], 15);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(mapa);
+  for (const [k, p] of Object.entries(POSICIONES)) {
+    const c = L.circle(p.latlng, { radius: p.radio, weight: 3, fillOpacity: .7 }).addTo(mapa);
+    c.bindTooltip('', { permanent: true, direction: 'center', className: 'zona-tt' });
+    c.on('click', () => abrir(k));
+    const el = c.getElement(); el.setAttribute('tabindex', '0'); el.setAttribute('role', 'button');
+    el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(k); } });
+    circulos[k] = c;
+  }
+  pintaMapa(minuto);
+}
+function pintaMapa(m) { // color por nivel; rayado si estimado, sólido si medido
+  if (!mapa) return;
+  for (const [k, c] of Object.entries(circulos)) {
+    const z = ZONAS[k], n = nivelEn(z, m), med = esMedida(z, m);
+    c.setStyle({ color: COLOR_NIVEL[n], fillColor: med ? COLOR_NIVEL[n] : `url(#raya${n})`, dashArray: med ? null : '8 6' });
+    c.setTooltipContent(`${z.corto}<br>${NOMBRE_NIVEL[n]}`);
+    c.getElement().setAttribute('aria-label', `${z.nombre}: ${NOMBRE_NIVEL[n]}, dato ${med ? 'medido' : 'estimado'}. Abrir ficha`);
+  }
+}
+alHora.push(pintaMapa);
 document.querySelectorAll('[data-vista]').forEach((b) => b.addEventListener('click', () => {
-  document.getElementById('escena').classList.toggle('es3d', b.dataset.vista === '3d');
+  const es2d = b.dataset.vista === '2d';
+  escena.hidden = es2d; divMapa.hidden = !es2d;
+  if (es2d) { creaMapa(); mapa?.invalidateSize(); }
   document.querySelectorAll('[data-vista]').forEach((x) => x.setAttribute('aria-pressed', x === b));
 }));
 // ---------- Bandeja de alertas (sincronizada con el reloj de la demo) ----------
