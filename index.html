@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa Vivo de Avilés</title>
+<meta name="description" content="Mira cuánta gente hay antes de ir. El gemelo vivo de Avilés en 2D y 3D. Prototipo para Hackea Avilés 2026.">
+<meta name="theme-color" content="#0E3B43">
+<meta property="og:title" content="Mapa Vivo de Avilés">
+<meta property="og:description" content="Mira cuánta gente hay antes de ir. Prototipo para Hackea Avilés 2026.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 28 9v14L16 30 4 23V9z' fill='%230E3B43'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23F2C833'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ria:#0E3B43; --hueso:#F3EFE6; --tinta:#14211F; --vivo:#F2C833;
+  --tranquilo:#2E9E6B; --animado:#E8892B; --lleno:#D64541;
+  /* variantes de texto con contraste AA sobre hueso */
+  --t-tranquilo:#1F7A52; --t-animado:#9A520D; --t-lleno:#B5322E;
+  --suave:#4A5553; --linea:#D9D2C3; --blanco:#FFFDF8;
+  --display:'Archivo',system-ui,sans-serif; --texto:'Atkinson Hyperlegible',system-ui,sans-serif;
+  --r:14px; --ancho:1120px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--hueso);color:var(--tinta);font:400 1.0625rem/1.6 var(--texto);overflow-x:hidden}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0 0 .5em;letter-spacing:-.01em}
+h2{font-size:clamp(1.75rem,5vw,2.75rem);font-weight:800}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0 0 1em}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--vivo);outline-offset:3px;box-shadow:0 0 0 6px var(--tinta)}
+.envoltura{max-width:var(--ancho);margin:0 auto;padding:0 16px}
+.seccion{padding:72px 0}
+.ante{font:700 .875rem/1 var(--texto);letter-spacing:.12em;text-transform:uppercase;color:var(--suave);margin-bottom:12px}
+.entradilla{font-size:1.25rem;max-width:40ch}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.icono{width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.boton{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:12px 22px;border-radius:999px;font:700 1rem var(--texto);text-decoration:none;border:2px solid var(--tinta);cursor:pointer;transition:transform .2s}
+.boton:hover{transform:translateY(-2px)}
+.boton--vivo{background:var(--vivo);border-color:var(--vivo);color:var(--tinta)}
+.boton--claro{background:transparent;color:inherit;border-color:currentColor}
+.punto{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--vivo);box-shadow:0 0 0 0 rgba(242,200,51,.7);animation:late 1.8s infinite}
+@keyframes late{70%{box-shadow:0 0 0 10px rgba(242,200,51,0)}100%{box-shadow:0 0 0 0 rgba(242,200,51,0)}}
+/* Niveles: siempre texto + barras, nunca solo color */
+.nivel{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.9375rem}
+.barras{display:inline-flex;align-items:flex-end;gap:2px;height:14px}
+.barras i{width:4px;background:currentColor;opacity:.25;border-radius:1px}
+.barras i:nth-child(1){height:6px}.barras i:nth-child(2){height:10px}.barras i:nth-child(3){height:14px}
+.n1{color:var(--t-tranquilo)}.n2{color:var(--t-animado)}.n3{color:var(--t-lleno)}
+.n1 .barras i:nth-child(-n+1),.n2 .barras i:nth-child(-n+2),.n3 .barras i:nth-child(-n+3){opacity:1}
+/* CABECERA */
+/* HERO */
+/* DEMO */
+/* PROBLEMA */
+/* APPS */
+/* PARA TI */
+/* AYUNTAMIENTO */
+/* PRIVACIDAD */
+/* RUTA */
+/* EQUIPO Y PIE */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M4 12h15M13.5 6.5 19 12l-5.5 5.5"/></symbol>
+  <symbol id="i-hex" viewBox="0 0 24 24"><path d="M12 3 19.8 7.5v9L12 21l-7.8-4.5v-9z"/></symbol>
+</svg>
+<a class="sr-only" href="#demo">Saltar a la demo</a>
+<!-- @CABECERA -->
+<main>
+<!-- @HERO -->
+<!-- @DEMO -->
+<!-- @PROBLEMA -->
+<!-- @APPS -->
+<!-- @PARATI -->
+<!-- @AYTO -->
+<!-- @PRIVACIDAD -->
+<!-- @RUTA -->
+<!-- @EQUIPO -->
+</main>
+<!-- @PIE -->
+<script>
+// @JS
+</script>
+</body>
+</html>
