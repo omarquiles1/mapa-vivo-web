@@ -145,6 +145,22 @@ a{color:inherit}
 .tarjeta:hover{transform:translateY(-3px)}
 .tarjeta .icono{width:40px;height:40px;color:var(--ria);margin-bottom:12px}
 .tarjeta p{margin:0}
+/* Y PARA CADA VECINO */
+.vecino{margin-top:56px;padding-top:40px;border-top:2px solid var(--tinta)}
+.vecino__lista{display:grid;gap:0;list-style:none;padding:0;margin:24px 0;counter-reset:v}
+@media (min-width:768px){.vecino__lista{grid-template-columns:repeat(4,1fr)}}
+.vecino__lista li{counter-increment:v;padding:16px 16px 16px 0;border-bottom:1px solid var(--linea)}
+@media (min-width:768px){.vecino__lista li{border-bottom:0;border-right:1px solid var(--linea);padding:8px 16px}.vecino__lista li:last-child{border-right:0}}
+.vecino__lista li::before{content:"0" counter(v);display:block;font:800 1.75rem var(--display);color:var(--ria);margin-bottom:6px}
+.vecino__lista p{margin:0}
+.vecino__ejemplos{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.ejemplo{background:var(--blanco);border:2px dashed var(--suave);border-radius:var(--r);padding:20px}
+.ejemplo__tipo{font-size:.875rem;font-weight:700;color:var(--suave);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.ejemplo__btn{display:inline-block;padding:6px 14px;border-radius:999px;background:var(--tinta);color:var(--vivo);font-weight:700;font-size:.9375rem}
+.vecino__comercio{margin:24px 0 16px;padding:20px 24px;background:var(--ria);color:#E6F0EE;border-left:8px solid var(--vivo);border-radius:var(--r);font-size:1.125rem}
+.vecino__comercio strong{color:var(--vivo)}
+.vecino__letra{font-size:.875rem;color:var(--suave);margin:0;padding-left:18px}
+.bandeja--mini{margin-top:16px}
 /* AYUNTAMIENTO */
 .ayto{background:var(--ria);color:#E6F0EE}
 .ayto .ante{color:var(--vivo)}
@@ -315,10 +331,30 @@ a{color:inherit}
       <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M5 18V12M10 18V8M15 18V10M20 18V5"/></svg><h3>Sabe antes de ir</h3><p>Cada zona te dice si está tranquila, animada o llena. Con palabras, no solo con colores.</p></li>
       <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="m12 4 9 4.5-9 4.5-9-4.5zM3 12.5 12 17l9-4.5M3 16.5 12 21l9-4.5"/></svg><h3>Pasea en 3D</h3><p>Mira el ambiente de Galiana o de la plaza antes de salir de casa.</p></li>
       <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15zM10 20.5h4"/></svg><h3>Solo avisos de lo que te interesa</h3><p>Eliges tus temas. Si no quieres avisos, no hay avisos.</p></li>
-      <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2.5v2.5H14zM18 18h2v2h-2z"/></svg><h3>Tu QR da ventajas</h3><p>Descuentos en el comercio local de Avilés que se adhiera. Salir por tu ciudad tiene premio.</p></li>
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2.5v2.5H14zM18 18h2v2h-2z"/></svg><h3>Tu QR y tu actividad dan descuentos</h3><p>Enseña tu QR y usa la app: ganas descuentos en el comercio de Avilés que se adhiera.</p></li>
       <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg><h3>Cada monumento cuenta su historia</h3><p>Escanea su QR y el mapa te abre su ficha y su historia.</p></li>
       <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M12 3.5 19 6v5.5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="m9 12 2 2 4-4"/></svg><h3>Sin sentirte vigilado</h3><p>Contamos gente por zonas, nunca quién es quién. <a href="#privacidad">Nuestras 5 promesas</a>.</p></li>
     </ul>
+    <div class="vecino" aria-labelledby="vecino-t">
+      <h2 id="vecino-t">Y para cada vecino</h2>
+      <ol class="vecino__lista">
+        <li><h3>Te dice cuándo ir</h3><p>No solo cuánta gente hay ahora, también a qué hora se calma.</p></li>
+        <li><h3>Avísame cuando haya sitio</h3><p>Eliges un lugar y te avisamos cuando baje de Lleno. Solo si tú quieres.</p></li>
+        <li><h3>Publica tu plan</h3><p>Propón una quedada, un concierto o un paseo y aparece en el mapa para quien le interese.</p></li>
+        <li><h3>Tu actividad tiene premio</h3><p>Quien publica planes o usa la app gana descuentos en comercios de Avilés.</p></li>
+      </ol>
+      <div class="vecino__ejemplos">
+        <article class="ejemplo"><p class="ejemplo__tipo">Plan de ejemplo · 17:00</p><h3>Paseo por el casco antes del Descenso</h3><p>Salida desde la Plaza de España · 6 personas apuntadas</p><span class="ejemplo__btn">Me apunto</span></article>
+        <article class="ejemplo"><p class="ejemplo__tipo">Oferta de ejemplo · 19:00–20:00</p><h3>Cafetería de ejemplo</h3><p>Ahora está tranquila: café y bollo a mitad de precio</p><span class="nivel n1"><span class="barras" aria-hidden="true"><i></i><i></i><i></i></span>Tranquilo</span></article>
+      </div>
+      <p class="vecino__comercio"><strong>Para el comercio local: anúnciate en el mapa justo cuando hay hueco.</strong> Un bar tranquilo a las 19:00 lanza una oferta y el mapa se la enseña a quien está cerca. Así la gente se reparte por la ciudad.</p>
+      <ul class="vecino__letra">
+        <li>Los puntos y descuentos se dan por acciones dentro de la app (publicar un plan, que alguien se apunte, canjear un QR), nunca por tu ubicación.</li>
+        <li>Los planes tienen botón de «reportar» y los revisa el Ayuntamiento.</li>
+        <li>Los anuncios de comercios son un servicio previsto para el piloto.</li>
+        <li>Plan, oferta y negocio son ejemplos: no son reales.</li>
+      </ul>
+    </div>
   </div>
 </section>
 <section class="seccion ayto" id="ayuntamiento" aria-labelledby="ayto-t">
@@ -341,6 +377,11 @@ a{color:inherit}
       <p class="nota">Se rellena con la hora del reloj de la demo. Alertas de ejemplo.</p>
       <ol class="alertas" id="alertas" aria-live="polite"></ol>
     </div>
+    <div class="bandeja bandeja--mini">
+      <div class="bandeja__cab"><h3>Moderación de planes · Juventud (demo)</h3></div>
+      <p class="nota">Los planes que publica la gente se pueden reportar y los revisa el Ayuntamiento. Ejemplo.</p>
+      <ol class="alertas"><li><time>Revisar</time><span>Plan de ejemplo reportado: «Botellón en el Muelle a las 3:00»</span><span class="para">2 reportes · Oculto hasta revisión</span></li></ol>
+    </div>
   </div>
 </section>
 <section class="seccion" id="privacidad" aria-labelledby="priv-t">
@@ -354,6 +395,7 @@ a{color:inherit}
       <li><span>Sin cámaras.</span></li>
       <li><span>Todo es opcional.<small>Se desactiva con un toque.</small></span></li>
     </ol>
+    <p class="cierre" style="font-size:clamp(1.25rem,3.5vw,1.75rem);margin-top:32px"><span>Los premios se dan por lo que haces en la app, no por dónde estás.</span></p>
     <p class="nota" style="margin-top:24px">Desde el piloto, con evaluación de impacto en protección de datos (RGPD).</p>
   </div>
 </section>
@@ -364,7 +406,7 @@ a{color:inherit}
     <ol class="etapas">
       <li class="etapa etapa--hoy"><p class="cuando">Hoy</p><h3>Demo</h3><ul><li>Esta web y la maqueta</li><li>Datos de ejemplo</li></ul></li>
       <li class="etapa"><p class="cuando">Antroxu 2027</p><h3>Piloto</h3><ul><li>Casco histórico y ría</li><li>Validado con aforadores</li><li>Éxito: ≥ 80 % de acierto</li></ul></li>
-      <li class="etapa"><p class="cuando">2027</p><h3>Fase 2</h3><ul><li>Comercio local y QR</li><li>Comunidad y quedadas</li><li>Recuento anónimo por wifi</li></ul></li>
+      <li class="etapa"><p class="cuando">2027</p><h3>Fase 2</h3><ul><li>Comercio local y QR</li><li>Comunidad y quedadas</li><li>Recuento anónimo por wifi</li><li>Planes publicados por la comunidad y anuncios de comercios</li><li>Transporte en tiempo real</li></ul></li>
       <li class="etapa etapa--vision"><p class="cuando">Visión de futuro</p><h3>Más allá</h3><ul><li>Realidad virtual</li><li>Red de ciudades inteligentes</li></ul><p class="nota" style="margin:8px 0 0">Aún no existe: es hacia dónde podría crecer.</p></li>
     </ol>
   </div>
