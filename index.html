@@ -241,14 +241,14 @@ a{color:inherit}
     <div class="demo__cab">
       <span class="etiqueta"><span class="punto" aria-hidden="true"></span>Datos de ejemplo · sábado de Antroxu</span>
       <div class="segm" role="group" aria-label="Vista">
-        <button type="button" data-vista="2d" aria-pressed="false">2D</button>
-        <button type="button" data-vista="3d" aria-pressed="true">3D</button>
+        <button type="button" data-vista="2d" aria-pressed="true">2D</button>
+        <button type="button" data-vista="3d" aria-pressed="false">3D</button>
       </div>
     </div>
     <div class="demo__cuerpo">
       <div>
-        <div class="escena es3d" id="escena"><div class="maqueta" id="maqueta" role="group" aria-label="Maqueta de hexágonos del casco de Avilés y la ría"></div></div>
-        <div class="mapa-real" id="mapa-real" hidden role="region" aria-label="Mapa real de Avilés con las zonas de afluencia. Tabulador para recorrer las zonas, Intro para abrir su ficha."></div>
+        <div class="escena es3d" id="escena" hidden><div class="maqueta" id="maqueta" role="group" aria-label="Maqueta de hexágonos del casco de Avilés y la ría"></div></div>
+        <div class="mapa-real" id="mapa-real" role="region" aria-label="Mapa real de Avilés con las zonas de afluencia. Tabulador para recorrer las zonas, Intro para abrir su ficha."></div>
         <div class="reloj">
           <button type="button" id="play" aria-label="Reproducir la tarde"><svg class="icono" aria-hidden="true" id="play-i"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></button>
           <label class="sr-only" for="hora">Hora</label>
@@ -537,7 +537,7 @@ alHora.push((m) => {
     `<li class="${a.v ? 'v' : ''}"><time>${aHora(a.m)}</time><span>${a.txt}</span><span class="para">→ ${a.para}</span></li>`).join('')
     || '<li style="border-color:transparent"><time>—</time><span>Sin alertas todavía. Avanza el reloj de la demo.</span></li>';
 });
-queueMicrotask(() => ponHora(150));
+queueMicrotask(() => { ponHora(150); creaMapa(); }); // el mapa real es la vista inicial
 </script>
 </body>
 </html>
