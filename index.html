@@ -134,7 +134,29 @@ a{color:inherit}
 .tabla .si{color:var(--t-tranquilo)}.tabla .no{color:var(--suave)}
 .tabla .mvc{background:rgba(242,200,51,.25)}
 /* PARA TI */
+.tarjetas{display:grid;gap:16px;list-style:none;padding:0;margin:32px 0 0;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.tarjeta{background:var(--blanco);border-radius:var(--r);padding:24px;border:1px solid var(--linea);transition:transform .2s}
+.tarjeta:hover{transform:translateY(-3px)}
+.tarjeta .icono{width:40px;height:40px;color:var(--ria);margin-bottom:12px}
+.tarjeta p{margin:0}
 /* AYUNTAMIENTO */
+.ayto{background:var(--ria);color:#E6F0EE}
+.ayto .ante{color:var(--vivo)}
+.ayto .tarjeta{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:#E6F0EE}
+.ayto .tarjeta .icono{color:var(--vivo)}
+.tec{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:12px 0 0;font-size:.875rem;font-weight:700}
+.tec li{padding:2px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.3)}
+.tec .b{color:#7FD8AE}.tec .m{color:#F5C46A}.tec .a{color:#F9A35B}.tec .v{color:#FF8A82}.tec .c{color:#FFB3C4}
+.bandeja{margin-top:48px;background:#0A2C32;border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:24px}
+.bandeja__cab{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline}
+.bandeja__cab output{font:800 1.75rem var(--display);color:var(--vivo)}
+.alertas{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
+.alertas li{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;padding:12px 16px;border-left:4px solid var(--animado);background:rgba(255,255,255,.05);border-radius:6px;animation:entra .4s}
+.alertas li.v{border-color:var(--lleno)}
+.alertas time{font:700 1rem var(--display);color:var(--vivo)}
+.alertas .para{grid-column:2;font-size:.875rem;color:#B9CCC8}
+@keyframes entra{from{opacity:0;transform:translateX(-8px)}}
+.ayto .nota{color:#B9CCC8}
 /* PRIVACIDAD */
 /* RUTA */
 /* EQUIPO Y PIE */
@@ -248,8 +270,43 @@ a{color:inherit}
     </table>
   </div>
 </section>
-<!-- @PARATI -->
-<!-- @AYTO -->
+<section class="seccion" id="para-ti" aria-labelledby="ti-t">
+  <div class="envoltura">
+    <p class="ante">Para la ciudad</p>
+    <h2 id="ti-t">Para ti, que vives en Avilés</h2>
+    <p class="entradilla">Sin registro obligatorio: una web que se instala en el móvil. Así funcionará.</p>
+    <ul class="tarjetas">
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M5 18V12M10 18V8M15 18V10M20 18V5"/></svg><h3>Sabe antes de ir</h3><p>Cada zona te dice si está tranquila, animada o llena. Con palabras, no solo con colores.</p></li>
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="m12 4 9 4.5-9 4.5-9-4.5zM3 12.5 12 17l9-4.5M3 16.5 12 21l9-4.5"/></svg><h3>Pasea en 3D</h3><p>Mira el ambiente de Galiana o de la plaza antes de salir de casa.</p></li>
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15zM10 20.5h4"/></svg><h3>Solo avisos de lo que te interesa</h3><p>Eliges tus temas. Si no quieres avisos, no hay avisos.</p></li>
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2.5v2.5H14zM18 18h2v2h-2z"/></svg><h3>Tu QR da ventajas</h3><p>Descuentos en el comercio local de Avilés que se adhiera. Salir por tu ciudad tiene premio.</p></li>
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg><h3>Cada monumento cuenta su historia</h3><p>Escanea su QR y el mapa te abre su ficha y su historia.</p></li>
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M12 3.5 19 6v5.5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="m9 12 2 2 4-4"/></svg><h3>Sin sentirte vigilado</h3><p>Contamos gente por zonas, nunca quién es quién. <a href="#privacidad">Nuestras 5 promesas</a>.</p></li>
+    </ul>
+  </div>
+</section>
+<section class="seccion ayto" id="ayuntamiento" aria-labelledby="ayto-t">
+  <div class="envoltura">
+    <p class="ante">Para el Ayuntamiento</p>
+    <h2 id="ayto-t">Ver venir la ciudad</h2>
+    <p class="entradilla">Hoy las aglomeraciones se descubren cuando ya están ocurriendo. La plataforma municipal propone verlas formarse antes y llevar cada aviso a quien puede actuar.</p>
+    <p class="nota">Avilés tiene 75.351 habitantes y el 27,79 % supera los 65 años (INE, abril de 2025): retener a la gente joven y cuidar a la mayor en las aglomeraciones.</p>
+    <ul class="tarjetas">
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M3.5 17.5 9 12l4 3.5 7.5-8M15 7.5h5.5V13"/></svg><h3>Ve venir el pico</h3><p>Previsión con IA sobre los históricos de cada zona, la agenda y el tiempo.</p></li>
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><use href="#i-hex"/></svg><h3>La ciudad en directo</h3><p>Gemelo de concentraciones actualizado cada 15 minutos.</p>
+        <ul class="tec" aria-label="Niveles técnicos"><li class="b">Baja</li><li class="m">Media</li><li class="a">Alta</li><li class="v">Vigilancia ≥ 2 p/m²</li><li class="c">Crítico ≥ 3,5 p/m²</li></ul></li>
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M13 3 5.5 13.5H12L11 21l7.5-10.5H12z"/></svg><h3>Cada aviso a quien actúa</h3><p>Urgencia → 112. Ría → Autoridad Portuaria. Desperfecto → Cuida Avilés. Aglomeración → Policía Local.</p></li>
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M4 4h16v16H4zM4 10h16M4 15h16M10 4v16M15 4v16"/></svg><h3>Decide con datos</h3><p>Hot spots históricos por día y hora para planificar cortes, refuerzos y servicios.</p></li>
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><path d="M4 9h16l-1.5-4h-13zM5 9v11h14V9M10 20v-6h4v6"/></svg><h3>Ciudad viva, comercio vivo</h3><p>Más gente que se queda en Avilés y un programa de beneficios con el comercio local.</p></li>
+      <li class="tarjeta"><svg class="icono" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg><h3>Legal y abierto</h3><p>Conforme al RGPD desde el diseño y conectado a los datos abiertos de datos.aviles.es.</p></li>
+    </ul>
+    <div class="bandeja">
+      <div class="bandeja__cab"><h3>Bandeja de alertas · Policía Local (demo)</h3><output id="b-hora" aria-label="Hora de la demo">18:30</output></div>
+      <p class="nota">Se rellena con la hora del reloj de la demo. Alertas de ejemplo.</p>
+      <ol class="alertas" id="alertas" aria-live="polite"></ol>
+    </div>
+  </div>
+</section>
 <!-- @PRIVACIDAD -->
 <!-- @RUTA -->
 <!-- @EQUIPO -->
@@ -337,6 +394,19 @@ document.querySelectorAll('[data-vista]').forEach((b) => b.addEventListener('cli
   document.getElementById('escena').classList.toggle('es3d', b.dataset.vista === '3d');
   document.querySelectorAll('[data-vista]').forEach((x) => x.setAttribute('aria-pressed', x === b));
 }));
+// ---------- Bandeja de alertas (sincronizada con el reloj de la demo) ----------
+const ALERTAS = [
+  { m: 90, txt: 'Preaviso: Galiana pasará a Vigilancia hacia las 18:00', para: 'Policía Local · origen: modelo sobre histórico + agenda' },
+  { m: 120, txt: 'Galiana entra en Vigilancia (≥ 2 personas/m²)', para: 'Policía Local · origen: observación + usuarios de la app', v: true },
+  { m: 160, txt: 'Farola apagada en calle Rivero', para: 'Cuida Avilés · origen: aviso ciudadano' },
+  { m: 270, txt: 'Pico previsto en la Plaza Hermanos Orbón a las 21:00', para: 'Policía Local (preaviso) · origen: modelo sobre histórico' },
+];
+alHora.push((m) => {
+  document.getElementById('b-hora').value = aHora(m);
+  document.getElementById('alertas').innerHTML = ALERTAS.filter((a) => a.m <= m).reverse().map((a) =>
+    `<li class="${a.v ? 'v' : ''}"><time>${aHora(a.m)}</time><span>${a.txt}</span><span class="para">→ ${a.para}</span></li>`).join('')
+    || '<li style="border-color:transparent"><time>—</time><span>Sin alertas todavía. Avanza el reloj de la demo.</span></li>';
+});
 queueMicrotask(() => ponHora(150));
 // @JS
 </script>
